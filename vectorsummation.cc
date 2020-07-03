@@ -18,7 +18,7 @@ int main() {
     int accum = 0;
     vector<int> data;
 
-    //set each value of the vector data to its index
+    //set each value of the vector data to i(0 -> n - 1)
     for (int i = 0; i < n; ++i) {
         data.push_back(i);
     }
