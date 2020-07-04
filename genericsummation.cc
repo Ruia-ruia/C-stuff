@@ -7,9 +7,8 @@ using std::endl;
 using std::vector;
 
 template <class T>
-T sum(vector<T> d, int size) {
-    T res = 0;
-
+T sum(vector<T> d, int size, T res = 0) {
+    
     for (int i = 0; i < size; ++i) {
         res += d[i];
     }
