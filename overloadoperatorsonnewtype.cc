@@ -8,12 +8,13 @@ using std::string;
 
 class point {
   public:
+  /*
     double getx() { return x; }
     void setx(double v) { x = v; }
 
     double gety() { return y; }
     void sety(double v) { y = v; }
-
+  */
     double x, y;
 };
 
