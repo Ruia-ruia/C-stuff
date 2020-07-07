@@ -8,19 +8,20 @@ using std::endl;
 using std::ostream;
 using std::string;
 
-struct slistelem {
-    char *data;
-    slistelem *next;
-};
-
 class slist {
+    
+  struct slistelem {
+      char *data;
+      slistelem *next;
+  };
+
   public:
     slist():h(0){};         //empty list      -- pointing to 0
     ~slist(); //destructor      -- return every element back to system
 
     void prepend(char*);
     void print_h() { cout << h -> data << endl; }
-    void print_next() { cout << n << endl; n = n -> next; }
+    void print_next() { cout << n -> data << endl; n = n -> next; }
 
   private:
     void release();
@@ -58,8 +59,8 @@ int main() {
 
 //we call the methods with the dot operator
     my_slist.prepend(a);
-    my_slist.prepend(a);
-    my_slist.prepend(a);
+    my_slist.prepend(b);
+    my_slist.prepend(c);
 
     my_slist.print_next();
     my_slist.print_next();
