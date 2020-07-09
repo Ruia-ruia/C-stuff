@@ -7,9 +7,9 @@ using std::cin;
 using std::endl;
 using std::vector;
 
-//Cardinality of node set
-//for the randomly generated graph
+//size of graph, max weight of edges
 const int size = 10;
+const int max_weight = 100;
 
 class node {
   public:
@@ -29,7 +29,7 @@ class node {
 };
 void node::print_neighbours() {
     for (int i = 0; i < neighbours.size(); ++i) {
-        cout << neighbours[i][0] << endl;
+        cout << "neighbour: " << neighbours[i][0] << "| weight: " << neighbours[i][1] << endl;
     }
 }
 
@@ -77,11 +77,11 @@ graph& gen_graph(graph& new_g) {
         new_g.add_node(i);
     }
 
+    srand(time(0));
     for (int i = 0; i < size; ++i) {
         for (int j = i; j < size; ++j) {
             if (matrix[i][j]) {
-                int weight = static_cast<int>(rand())
-                           / static_cast<int>(RAND_MAX);
+                int weight = 1 + (static_cast<int>(rand()) % max_weight);
 
                 new_g.add_edge(i, j, weight);
             }
