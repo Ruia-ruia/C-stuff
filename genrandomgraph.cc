@@ -1,5 +1,3 @@
-//Add destructors
-
 #include <iostream>
 #include <vector>
 #include <ctime>
@@ -85,11 +83,15 @@ void gen_graph(graph& new_g) {
         for (int j = i; j < size; ++j) {
             if (matrix[i][j]) {
                 int weight = 1 + (static_cast<int>(rand()) % max_weight);
-
                 new_g.add_edge(i, j, weight);
+
             }
         }
     }
+
+    //garbage collection
+    for (int i = 0; i < size; ++i) delete matrix[i];
+    delete matrix;
 }
 
 int main() {
