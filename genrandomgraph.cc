@@ -1,3 +1,5 @@
+//Add destructors
+
 #include <iostream>
 #include <vector>
 #include <ctime>
