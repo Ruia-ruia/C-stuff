@@ -29,7 +29,8 @@ class node {
 };
 void node::print_neighbours() {
     for (int i = 0; i < neighbours.size(); ++i) {
-        cout << "neighbour: " << neighbours[i][0] << "| weight: " << neighbours[i][1] << endl;
+        cout << "neighbour: " << neighbours[i][0] <<
+                 "| weight: " << neighbours[i][1] << endl;
     }
 }
 
@@ -49,8 +50,8 @@ class graph {
     vector<node> nodes;
 };
 
-//Generate random graph and return reference
-graph& gen_graph(graph& new_g) {
+//Generate random graph from reference
+void gen_graph(graph& new_g) {
     bool** matrix;
     srand(time(0));
 
@@ -87,17 +88,15 @@ graph& gen_graph(graph& new_g) {
             }
         }
     }
-
-    return new_g;
 }
-
 
 int main() {
     graph g;
-    g = gen_graph(g);
+    gen_graph(g);
 
     for (int i = 0; i < size; ++i) {
         g.print_neighbours_of(i);
         cout << "----" << endl;
     }
 }
+
