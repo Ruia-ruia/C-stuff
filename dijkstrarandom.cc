@@ -8,14 +8,16 @@ using std::endl;
 using std::vector;
 
 //size of graph, max weight of edges
-const int size = 10;
-const int max_weight = 100;
+const int size = 50;
+const int max_weight = 15;
 
 class node;
 class graph;
 class priorityq;
 class qelem;
 
+
+//element for priority queue
 class qelem {
   node* item;
   int p;
@@ -30,12 +32,14 @@ class qelem {
     int get_priority() { return p; }
 };
 
+//priority queue
 class priorityq {
   public:
     void set_item(node& n, int p) {
         qelem elem(&n, p);
         bool flag = false;
 
+        //keep the queue in ascending order
         for (int i = 0; i < items.size(); ++i) {
             if(items[i].get_priority() > elem.get_priority()) {
                 items.insert(items.begin() + i, elem);
@@ -49,6 +53,7 @@ class priorityq {
         }
     }
 
+    //equivalent to a pop operation
     qelem return_head() {
         qelem n = items[0];
         items.erase(items.begin());
@@ -69,6 +74,7 @@ class priorityq {
     vector<qelem> items;
 };
 
+//individual node class
 class node {
   public:
     node(int id):id(id){};
@@ -103,10 +109,12 @@ class node {
 void node::print_neighbours() {
     for (int i = 0; i < neighbours.size(); ++i) {
         cout << "neighbour: " << neighbours[i][0] <<
-                 "| weight: " << neighbours[i][1] << endl;
+                 "| edge weight: " << neighbours[i][1] << endl;
     }
 }
 
+//the actual graph - instantiates nodes
+//and deals with weights between them
 class graph {
   public:
     void add_node(int id) {
@@ -132,6 +140,7 @@ class graph {
   private:
     vector<node> nodes;
 };
+//Path-finding algorithm as per the specification
 vector<int> graph::dijkstra() {
     vector<int> backtrace;
     vector<int> dists;
