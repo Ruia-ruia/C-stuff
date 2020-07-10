@@ -231,12 +231,18 @@ int main() {
         g.print_neighbours_of(i);
         cout << "-------" << endl;
     }
-    cout << "~~~~~~~~~~~~~~~~" << endl;
+
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cout << "Shortest distances to each node from the 0th node: " << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 
     vector<int> res = g.dijkstra();
     for (int i = 0; i < res.size(); ++i) {
+        if (res[i] == -1) continue;
         cout << i << ": " << res[i] << endl;
     }
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 
 }
+
 
