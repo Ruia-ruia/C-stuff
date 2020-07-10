@@ -11,9 +11,66 @@ using std::vector;
 const int size = 10;
 const int max_weight = 100;
 
+class node;
+class graph;
+class priorityq;
+class qelem;
+
+class qelem {
+
+  node* item;
+  int p;
+
+  public:
+    qelem(node* it, int priority) {
+        item = it;
+        p = priority;
+    }
+
+    node* get_item() { return item; }
+    int get_priority() { return p; }
+};
+
+class priorityq {
+  public:
+    void set_item(node& n, int p) {
+        qelem elem(&n, p);
+        bool flag = false;
+
+        for (int i = 0; i < items.size(); ++i) {
+            if(items[i].get_priority() > elem.get_priority()) {
+                items.insert(items.begin() + i, elem);
+                flag = true;
+                break;
+            }
+        }
+
+        if (!flag) {
+            items.push_back(elem);
+        }
+    }
+
+    node* return_head() {
+        return items[0].get_item();
+    }
+
+    void print_items() {
+        for (int i = 0; i < items.size(); ++i) {
+            cout << items[i].get_item() << endl;
+            cout << items[i].get_priority() << endl;
+            cout << "-----------" << endl;
+        }
+    }
+
+  private:
+    vector<qelem> items;
+};
+
 class node {
   public:
     node(int id):id(id){};
+
+    void print_neighbours();
 
     void add_neighbour(int neigh, int weight) {
       vector<int> v;
@@ -21,7 +78,14 @@ class node {
       v.push_back(weight);
       neighbours.push_back(v); };
 
-    void print_neighbours();
+    int get_weight(int id) {
+        for (int i = 0; i < neighbours.size(); ++i) {
+            if (neighbours[i][0] == id) {
+                return neighbours[i][1];
+            }
+        }
+        return -1;
+    }
 
   private:
     int id;
@@ -46,9 +110,23 @@ class graph {
     void print_neighbours_of(int id) {
       nodes[id].print_neighbours(); }
 
+    int get_weight(int id, int neighbour_id) {
+        return nodes[id].get_weight(neighbour_id);
+    }
+
+    node& resolve_node(int id) {
+        return nodes[id];
+    }
+
+    vector<int> dijkstra();
+
   private:
     vector<node> nodes;
 };
+vector<int> graph::dijkstra() {
+
+}
+
 
 //Generate random graph from reference
 void gen_graph(graph& new_g) {
@@ -91,16 +169,22 @@ void gen_graph(graph& new_g) {
 
     //garbage collection
     for (int i = 0; i < size; ++i) delete matrix[i];
-    delete matrix;
+    delete [] matrix;
 }
 
 int main() {
     graph g;
     gen_graph(g);
 
-    for (int i = 0; i < size; ++i) {
-        g.print_neighbours_of(i);
-        cout << "----" << endl;
-    }
+    priorityq pq;
+    pq.set_item(g.resolve_node(0), 3);
+    pq.set_item(g.resolve_node(1), 2);
+    pq.set_item(g.resolve_node(3), 5);
+    pq.set_item(g.resolve_node(2), 1);
+
+    pq.print_items();
+
+    node *n = pq.return_head();
+    n -> print_neighbours();
 }
 
