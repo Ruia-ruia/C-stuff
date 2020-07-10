@@ -143,7 +143,7 @@ vector<int> graph::dijkstra() {
     backtrace.resize(size);
     for (int i = 0; i < backtrace.size(); ++i) { backtrace[i] = -1; }
     backtrace[0] = 0;
-    
+
     pq.set_item(resolve_node(curr), 0);
 
     dists[curr] = 0;
@@ -226,11 +226,17 @@ int main() {
     graph g;
     gen_graph(g);
 
+    for (int i = 0; i < size; ++i) {
+        cout << "node: " << i << "| " << endl;
+        g.print_neighbours_of(i);
+        cout << "-------" << endl;
+    }
+    cout << "~~~~~~~~~~~~~~~~" << endl;
+
     vector<int> res = g.dijkstra();
     for (int i = 0; i < res.size(); ++i) {
         cout << i << ": " << res[i] << endl;
     }
 
 }
-
 
